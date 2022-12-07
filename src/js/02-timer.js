@@ -75,9 +75,6 @@ handleClick = () => {
         secondsField.textContent = addLeadingZero(seconds.toString());
 
         countTime -= 1000;
-        // if (countTime <= 0) {
-        //     clearInterval(timerOnSite);
-        // }
     }, 1000);
 }
 
