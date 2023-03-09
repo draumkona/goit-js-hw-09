@@ -62,7 +62,7 @@ const options = {
     }
 };
 
-handleClick = () => {
+function handleClick() {
     startBtn.disabled = true;
 
     timerOnSite = setInterval(() => {
