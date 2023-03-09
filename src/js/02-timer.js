@@ -1,3 +1,4 @@
+"use strict" 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
@@ -76,7 +77,7 @@ handleClick = () => {
 
         countTime -= 1000;
     }, 1000);
-}
+};
 
 flatpickr(input, options);
 startBtn.addEventListener("click", handleClick);
