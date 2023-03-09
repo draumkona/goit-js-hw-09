@@ -62,10 +62,7 @@ const options = {
     }
 };
 
-flatpickr(input, options);
-startBtn.addEventListener("click", clickHandle);
-
-clickHandle = () => {
+handleClick = () => {
     startBtn.disabled = true;
 
     timerOnSite = setInterval(() => {
@@ -81,3 +78,6 @@ clickHandle = () => {
         countTime -= 1000;
     }, 1000);
 };
+
+flatpickr(input, options);
+startBtn.addEventListener("click", handleClick);
