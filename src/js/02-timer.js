@@ -14,6 +14,7 @@ let date = new Date;
 let actualDateTime = date.getTime();
 let timerOnSite = 0;
 let countTime = 0;
+let settingTime = 0;
 
 startBtn.disabled = true;
 
@@ -64,18 +65,23 @@ const options = {
 
 function handleClick() {
     startBtn.disabled = true;
-
+    actualDateTime = new Date();
     timerOnSite = setInterval(() => {
         let settingTime = convertMs(countTime);
 
         const { days, hours, minutes, seconds } = settingTime;
+
+        countTime -= 1000;
 
         daysField.textContent = addLeadingZero(days.toString());
         hoursField.textContent = addLeadingZero(hours.toString());
         minutesField.textContent = addLeadingZero(minutes.toString());
         secondsField.textContent = addLeadingZero(seconds.toString());
 
-        countTime -= 1000;
+        if (settingTime.days && settingTime.hours && settingTime.minutes && settingTime.seconds <= 0) {
+            clearInterval(timerOnSite);
+            actualDateTime = new Date();
+    }
     }, 1000);
 };
 

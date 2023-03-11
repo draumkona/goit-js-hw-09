@@ -18,12 +18,12 @@ function createPromise(position, delay) {
       }
     }, delay)
   })
-}
+};
 
 function submitProcess(event) {
   event.preventDefault();
   promiseButton.disabled = true;
-  for (let i = 0; i <= amount.value; i += 1) {
+  for (let i = 0; i < amount.value; i += 1) {
     createPromise(i + 1, Number(delay.value) + Number(step.value) * i)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
