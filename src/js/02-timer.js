@@ -80,7 +80,11 @@ function handleClick() {
 
         if (settingTime.days && settingTime.hours && settingTime.minutes && settingTime.seconds <= 0) {
             clearInterval(timerOnSite);
-            actualDateTime = new Date();
+            
+            daysField.textContent = "00";
+            hoursField.textContent = "00";
+            minutesField.textContent = "00";
+            secondsField.textContent = "00";
     }
     }, 1000);
 };
