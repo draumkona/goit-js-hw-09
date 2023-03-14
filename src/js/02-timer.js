@@ -14,7 +14,6 @@ let date = new Date;
 let actualDateTime = date.getTime();
 let timerOnSite = 0;
 let countTime = 0;
-let settingTime = 0;
 
 startBtn.disabled = true;
 
@@ -68,9 +67,7 @@ function handleClick() {
     actualDateTime = new Date();
     timerOnSite = setInterval(() => {
         let settingTime = convertMs(countTime);
-
         const { days, hours, minutes, seconds } = settingTime;
-
         countTime -= 1000;
 
         daysField.textContent = addLeadingZero(days.toString());
