@@ -2,7 +2,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
-const timer = document.querySelector(".timer");
 const daysField = document.querySelector("span[data-days]");
 const hoursField = document.querySelector("span[data-hours]");
 const minutesField = document.querySelector("span[data-minutes]");
@@ -10,10 +9,10 @@ const secondsField = document.querySelector("span[data-seconds]");
 const input = document.querySelector("#datetime-picker");
 const startBtn = document.querySelector("button[data-start]");
 
-let date = new Date;
-let actualDateTime = date.getTime();
+let actualDateTime;
 let timerOnSite = 0;
 let countTime = 0;
+let selectedDateTime;
 
 startBtn.disabled = true;
 
@@ -44,31 +43,47 @@ function addLeadingZero(value) {
         }
     };
 
-const options = {
+flatpickr(input, {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        let selectedDateTime = selectedDates[0].getTime();
-
-        if (actualDateTime >= selectedDateTime) {
+        console.log(selectedDates[0]);
+        actualDateTime = new Date().getTime();
+        selectedDateTime = selectedDates[0].getTime();
+ 
+        if (selectedDateTime < actualDateTime) {
             window.alert("Please choose a date in the future.");
+            clearInterval(timerOnSite);
         } else {
             startBtn.disabled = false;
-            countTime = selectedDateTime - actualDateTime;
-            startBtn.addEventListener("click", convertMs(countTime));
+            clearInterval(timerOnSite);
+            console.log(new Date());
         }
     }
-};
+});
 
 function handleClick() {
     startBtn.disabled = true;
-    actualDateTime = new Date();
+    //startBtn.addEventListener("click", convertMs(countTime));
+    // 
+    // 
+    // console.log(convertMs(countTime));
+    // console.log(settingTime)
+    actualDateTime = new Date().getTime();
+    
+    countTime = selectedDateTime - actualDateTime;
+    console.log(convertMs(countTime))
+
     timerOnSite = setInterval(() => {
         let settingTime = convertMs(countTime);
         const { days, hours, minutes, seconds } = settingTime;
+    
+        console.log(convertMs(countTime))
         countTime -= 1000;
+        
+
 
         daysField.textContent = addLeadingZero(days.toString());
         hoursField.textContent = addLeadingZero(hours.toString());
@@ -82,9 +97,9 @@ function handleClick() {
             hoursField.textContent = "00";
             minutesField.textContent = "00";
             secondsField.textContent = "00";
-    }
+        }
     }, 1000);
 };
 
-flatpickr(input, options);
+
 startBtn.addEventListener("click", handleClick);
